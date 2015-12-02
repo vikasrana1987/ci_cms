@@ -8,18 +8,15 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
+bower_components/*
+node_modules/*
+
 user_guide_src/*
 
 /vendor/
 
-# IDE Files
+# GIT Files
 #-------------------------
-/nbproject/
-.idea/*
 
-## Sublime Text cache files
-*.tmlanguage.cache
-*.tmPreferences.cache
-*.stTheme.cache
-*.sublime-workspace
-*.sublime-project
+.git/*
+
