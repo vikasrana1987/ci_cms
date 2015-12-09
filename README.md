@@ -14,4 +14,7 @@ for a given task.
 Libraries Used
 *******************
 
-1. http://www.grocerycrud.com/codeigniter-simplicity#getting-started
+1. http://www.grocerycrud.com/codeigniter-simplicity
+2. https://cartalyst.com/manual/sentry/2.1
+3. https://github.com/dwightwatson/codeigniter-breadcrumb
+4. https://github.com/chriskacerguis/codeigniter-restserver

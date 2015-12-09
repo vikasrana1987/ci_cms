@@ -1,5 +1,5 @@
 {
-	"description": "The CodeIgniter framework",
+	"description": "CI CMS",
 	"name": "codeigniter/framework",
 	"type": "project",
 	"homepage": "http://codeigniter.com",
@@ -11,9 +11,15 @@
 		"source": "https://github.com/bcit-ci/CodeIgniter"
 	},
 	"require": {
-		"php": ">=5.2.4"
+		"php": ">=5.2.4",
+		"cartalyst/sentry": "2.1.*",
+		"illuminate/database": "4.0.*",
+        "ircmaxell/password-compat": "1.0.*"
 	},
 	"require-dev": {
 		"mikey179/vfsStream": "1.1.*"
+	},
+	"config": {
+		"vendor-dir": "application/vendor"
 	}
 }

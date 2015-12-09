@@ -8,12 +8,12 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
+application/vendor/*
+
 bower_components/*
 node_modules/*
 
 user_guide_src/*
-
-/vendor/
 
 # GIT Files
 #-------------------------

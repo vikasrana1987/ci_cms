@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  * 
  * 
  */
-class User_model extends CI_Model
+class Auth extends CI_Model
 {
 	public function __construct()
 	{
