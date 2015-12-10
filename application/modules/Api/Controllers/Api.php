@@ -14,16 +14,14 @@ class Api extends API_Controller {
         $this->methods['user_get']['limit'] = 500; // 500 requests per hour per user/key
         $this->methods['user_post']['limit'] = 100; // 100 requests per hour per user/key
         $this->methods['user_delete']['limit'] = 50; // 50 requests per hour per user/key
+		
+		$this->load->model('api_model');
     }
 
     public function users_get()
     {
         // Users from a data store e.g. database
-        $users = [
-            ['id' => 1, 'name' => 'John', 'email' => 'john@example.com', 'fact' => 'Loves coding'],
-            ['id' => 2, 'name' => 'Jim', 'email' => 'jim@example.com', 'fact' => 'Developed on CodeIgniter'],
-            ['id' => 3, 'name' => 'Jane', 'email' => 'jane@example.com', 'fact' => 'Lives in the USA', ['hobbies' => ['guitar', 'cycling']]],
-        ];
+        $users = $this->api_model->getUsers();
 
         $id = $this->get('id');
 
