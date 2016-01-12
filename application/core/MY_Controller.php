@@ -11,6 +11,17 @@ class MY_Controller extends MX_Controller {
     function __construct()
     {
         parent::__construct();
+		
+		/* Debugging */ 
+		/* $this->load->add_package_path(APPPATH.'third_party/debugbar');
+        $this->load->library('console');
+        $this->output->enable_profiler(TRUE);
+        $this->console->exception(new Exception('test exception'));
+		$this->console->debug('Debug message');
+		$this->console->info('Info message');
+		$this->console->warning('Warning message');
+		$this->console->error('Error message'); */
+		/* End Debugging */ 
         // load database configuration from CodeIgniter
         $this->load->database();
 		$this->output->set_title('Administrator');

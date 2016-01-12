@@ -18,16 +18,22 @@ class Admin extends Admin_Controller {
 		//$this->message->set('danger', 'Test Message');
 		$data = array();
 		
-		/*  // Create the user
+		 // Create the user
 		$user = Sentry::createUser(array(
-			'email'     => 'vikas.rana@sebiz.net',
+			'email'     => 'vikas.rana1@sebiz.net',
 			'first_name' => 'Root',
 			'last_name' => 'User',
 			'password'  => 'demo123',
 			'activated' => true,
 			'permissions' => array('superuser' => '1')
 		));
-
+		//echo '<pre>'; print_r($user);
+	//	$user = $user->getUser();
+		//$user = (array)$user;
+		echo '<pre>'; print_r($user->getId());
+		echo '<pre>'; print_r($user['*original']);
+		die;
+		/* 
 		// Find the group using the group id
 		$adminGroup = Sentry::findGroupById(1); 
 
