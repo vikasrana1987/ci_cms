@@ -24,13 +24,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
+date_default_timezone_set('America/Chicago');
 if(isset($_SERVER['HTTPS'])){
 	$protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
 }
 else{
 	$protocol = 'http';
 }
-$base_url = $protocol . "://" . $_SERVER['HTTP_HOST'].'/ci_cms/' ;
+$base_url = $protocol . "://" . $_SERVER['HTTP_HOST'].'/ci_cms';
 $config['base_url'] = $base_url;
 
 /*

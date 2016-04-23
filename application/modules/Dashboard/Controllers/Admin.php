@@ -6,8 +6,8 @@ class Admin extends Admin_Controller {
 		parent::__construct();
 		if (!Sentry::check())
 		{
-			$this->message->set('danger', 'You must login to access this module');
-			redirect('admin/auth');
+			$this->message->set('danger', 'You must login to access this module',TRUE,'message');
+			redirect(website_url('auth'));
 		}
 	}
 
@@ -20,7 +20,7 @@ class Admin extends Admin_Controller {
 
 		$data = array();
 		// load view
-		$this->load->view('index',$data);
+		$this->load->view(parent::$module.'/index',$data);
 	}
 
 }

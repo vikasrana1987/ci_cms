@@ -49,12 +49,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'user';
+$route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
 
+// ultraadmin routes
+$route['ultraadmin/([a-zA-Z_-]+)/(:any)'] = '$1/ultraAdmin/$2';
+$route['ultraadmin/([a-zA-Z_-]+)/(:any)/(:any)'] = '$1/ultraAdmin/$2/$3';
+$route['ultraadmin/([a-zA-Z_-]+)/(:any)/(:any)/(:any)'] = '$1/ultraAdmin/$2/$3/$4';
+$route['ultraadmin/([a-zA-Z_-]+)'] = '$1/ultraAdmin/index';
 
+// superadmin routes
 $route['admin/([a-zA-Z_-]+)/(:any)'] = '$1/admin/$2';
+$route['admin/([a-zA-Z_-]+)/(:any)/(:any)'] = '$1/admin/$2/$3';
 $route['admin/([a-zA-Z_-]+)'] = '$1/admin/index';
 
 /* $handle = opendir(APPPATH.'modules');

@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $url=current_url();
 $parts = explode("/", $url);
 $module = end($parts);
+if($module == 'ultraadmin') { redirect('ultraadmin/auth'); }
 if($module == 'admin') { redirect('admin/auth'); }
 ?><!DOCTYPE html>
 <html lang="en">
