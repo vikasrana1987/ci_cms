@@ -90,7 +90,7 @@ class Admin extends Admin_Controller {
 		}
 		
 		$data['email'] = array('name' => 'email',
-			'autofocus' => 'autofocus',
+			'autocomplete' => 'off',
 			'id' => 'email',
 			'placeholder' => 'Email',
 			'class' => 'form-control',
@@ -99,7 +99,7 @@ class Admin extends Admin_Controller {
 		);
 		
 		$data['password'] = array('name' => 'password',
-			'autofocus' => 'autofocus',
+			'autocomplete' => 'off',
 			'id' => 'password',
 			'placeholder' => 'Password',
 			'class' => 'form-control',

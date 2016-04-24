@@ -54,54 +54,61 @@ $(function(){
 	}
 
 	site_url=$('#website_url').val();
-	/* Clients Module */
-	$('#clients_listing').dataTable({
-		"bStateSave": true,
-		"bProcessing": true,
-		"bServerSide": true,
-		"sAjaxSource": site_url+"clients/loadClients",
-		//"aaSorting" : [[2, 'desc']], To sort by specific column by default
-		"aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [ 13 ] }
-        ],
-		"aoColumns": [
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-			{},
-			{},
-			{},
-			{},
-            {
-                "mData": null,
-                "sClass": "center",
-                "sDefaultContent": '<a href="" module="clients" class="editor_edit"><i class="glyphicon glyphicon-edit"></i></a>&nbsp;<a href="" module="clients" class="editor_remove"><i class="glyphicon glyphicon-remove"></i></a>'
-            }
-        ]
-	});
 	
-	// Delete a record
-    $('body').on('click', 'a.editor_remove', function (e) {
-        e.preventDefault();
-		//$(this).parents('tr')[0].remove();
-		var module=$(this).attr('module');
-		var id=$(this).parents('tr').children('td').html();
-		modal('Deletion Confirmation?','Are you sure you want to delete?',module+'/remove/'+urlencode(base64_encode(id)));
+	//Command Buttons
+	var grid = $("#users_listing").bootgrid({
+		ajax: true,
+		url: site_url+"users/loadClients",
+		formatters: {
+			"commands": function(column, row) {
+				return "<button module=\"users\" type=\"button\" class=\"btn btn-icon command-edit waves-effect waves-circle\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-edit\"></span></button> " + 
+					"<button module=\"users\" type=\"button\" class=\"btn btn-icon command-delete waves-effect waves-circle\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-delete\"></span></button>";
+			}
+		}
+	}).on("loaded.rs.jquery.bootgrid", function () {
+		/* Executes after data is loaded and rendered */
+		grid.find(".command-edit").on("click", function (e) {
+			var module=$(this).attr('module');
+			var id=$(this).data("row-id");
+			window.location.href=module+'/edit/'+urlencode(base64_encode(id));
+		});
 		
-    });
-   // Edit a record
-    $('body').on('click', 'a.editor_edit', function (e) {
-        e.preventDefault();
-		var module=$(this).attr('module');
-		var id=$(this).parents('tr').children('td').html();
-		window.location.href=module+'/edit/'+urlencode(base64_encode(id));
-    });
+		grid.find(".command-delete").on("click", function (e) {
+			var module=$(this).attr('module');
+			var id=$(this).data("row-id");
+			
+			 swal({
+                title: "Are you sure?",
+                text: "All your saved localStorage values will be removed",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            }, function(){
+				swal("Done!", "Deleting...", "success");
+                window.location.href= module+'/remove/'+urlencode(base64_encode(id));
+            });
+			
+		});
+	}).on("selected.rs.jquery.bootgrid", function(e, rows)
+	{
+		var rowIds = [];
+		for (var i = 0; i < rows.length; i++)
+		{
+			rowIds.push(rows[i].id);
+		}
+		alert("Select: " + rowIds.join(","));
+	}).on("deselected.rs.jquery.bootgrid", function(e, rows)
+	{
+		var rowIds = [];
+		for (var i = 0; i < rows.length; i++)
+		{
+			rowIds.push(rows[i].id);
+		}
+		alert("Deselect: " + rowIds.join(","));
+	});
+		
 	/* End Users Module */
 	
 	$(":button").click(function(){
@@ -111,65 +118,4 @@ $(function(){
 			location.href = url;
 		}
 	});
-	
-	/* $("form").submit(function( event ) {
-		var loading = $.loading();
-		loading.open();
-		//event.preventDefault();
-	}); */
-	
-	$("#menu-toggle").click(function(e) {
-		e.preventDefault();
-		$("#wrapper").toggleClass("toggled");
-	});
-	 $("#expand").click(function(e) {
-		e.preventDefault();
-		$("#user-stats").toggleClass("toggled");
-	});
-	$(".international-number").intlTelInput({
-        // allowExtensions: true,
-        // autoFormat: false,
-        // autoHideDialCode: false,
-        // autoPlaceholder: false,
-        // dropdownContainer: $("body"),
-        // excludeCountries: ["us"],
-        // geoIpLookup: function(callback) {
-        //   $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
-        //     var countryCode = (resp && resp.country) ? resp.country : "";
-        //     callback(countryCode);
-        //   });
-        // },
-        // initialCountry: "auto",
-        // nationalMode: false,
-        // numberType: "MOBILE",
-        // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-        // preferredCountries: ['cn', 'jp'],
-       // utilsScript: "lib/libphonenumber/build/utils.js"
-    });
-	if ($('#phone_number').length > 0) {
-		$(".international-number").intlTelInput("setNumber", $('#phone_number').val());
-	}	
 });
-function modal(title,message,action)
-{
-	bootbox.dialog({
-		title: title,
-		message: message,
-		buttons: {
-		success: {
-			label: "No",
-			className: "btn-primary",
-			callback: function() {
-				
-			}
-		},
-		main: {
-			label: "Yes",
-			className: "btn-danger",
-			callback: function() {
-				window.location.href=action;
-			}
-		}
-	  }
-	});
-}
